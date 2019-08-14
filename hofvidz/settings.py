@@ -26,7 +26,7 @@ SECRET_KEY = '3eip&ddl!m5$0+0%3zr$7wiu07(c2-=#jjbiwq7t@atn49fxq^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fierce-crag-81146.herokuapp.com']
 
 
 LOGIN_URL = 'login'
