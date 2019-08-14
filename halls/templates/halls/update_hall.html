@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Create Hall - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+ <div class="container">
+    <h3>Edit Hall</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                {% load widget_tweaks %}
+                    {% for field in form %}
+                    <div class="form-group py-1 {% if field.errors %} alert alert-danger {% endif %}">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {% render_field field class="form-control" %}
+                    </div>
+                    {% endfor %}
+                <button type="submit" class="btn btn-warning">Save Hall</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <h2><a href="{% url 'delete_hall' hall.id %}" class="btn btn-danger">Delete this Hall of Fame</a></h2>
+ </div>
+{% endblock %}

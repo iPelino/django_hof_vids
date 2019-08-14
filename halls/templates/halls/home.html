@@ -3,3 +3,55 @@
 {% block title %}
     Home - {{ block.super }}
 {% endblock %}
+
+{% block content %}
+
+    <section class="jumbotron bg-dark" style="border-radius: 0">
+        <div class="container text-center">
+            <h4 class="jumbotron-heading text-danger">What's your personal Hall of Fame?</h4>
+            <p class="lead text-muted">You know what they are. They are your favorite videos. You have your top 10 list and it's time to share them with the world. Click the button below to get started.</p>
+            <hr class="my-4">
+            <p>
+                <a href="{% url 'create_hall' %}" class="btn btn-danger">Create your Hall of fame</a>
+            </p>
+        </div>
+    </section>
+    <div class="container">
+        <h3 class="text-center">Popular Hall of Fame</h3>
+        {% for popular_hall in popular_halls %}
+            <h4><a href="{% url 'detail_hall' popular_hall.id %}">{{ popular_hall.title }}</a></h4>
+            <div class="row">
+            {% for video in popular_hall.video_set.all %}
+                <div class="col-md-4 mt-3">
+                    <div class="card mb-4 shadow-sm">
+                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="card-body">
+                            <p class="card-text">{{video.title}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+        {% endfor %}
+
+    <h3 class="text-center">Recent Hall of Fame</h3>
+        {% for recent_hall in recent_halls %}
+            <h4><a href="{% url 'detail_hall' recent_hall.id %}">{{ recent_hall.title }}</a></h4>
+            <div class="row">
+            {% for video in recent_hall.video_set.all %}
+                <div class="col-md-4 mt-3">
+                    <div class="card mb-4 shadow-sm">
+                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="card-body">
+                            <p class="card-text">{{video.title}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+        {% endfor %}
+
+    </div>
+{% endblock %}
